@@ -1,0 +1,23 @@
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Themes.Fluent;
+
+namespace InternetPro.Platforms.Shared;
+
+public sealed class App : Application
+{
+    public override void Initialize()
+    {
+        Styles.Add(new FluentTheme());
+    }
+
+    public override void OnFrameworkInitializationCompleted()
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            desktop.MainWindow = new MainWindow();
+        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
+            singleView.MainView = new MainView();
+
+        base.OnFrameworkInitializationCompleted();
+    }
+}
